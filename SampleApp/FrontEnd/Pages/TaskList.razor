@@ -1,0 +1,63 @@
+@page "/"
+@using FrontEnd.Data
+@inject TaskItemClient TaskClient
+
+<PageTitle>Task list</PageTitle>
+
+<h1>Task list</h1>
+
+<p>Add and remove task</p>
+
+<div>
+    <div>
+        <input @bind="text" placeholder="Write a new task"/>
+        <button @onclick="AddNewTask" class="btn-add">Add</button>
+    </div>
+    <br />
+    <div>
+        @if (taskList == null){
+            <p>Loading...</p>
+        }else{
+            @foreach (var task in taskList){
+            <div class="list-area">
+                <p>@task.Text</p>
+                <div class="list-buttons">
+                    <input type="checkbox" @bind="task.Finished" />
+                <button @onclick="() => DeleteTask(task.Id)" class="btn-delete">Delete</button>
+                </div>
+            </div>
+            }
+        }
+    </div>
+</div>
+
+
+
+@code {
+    private TaskItem[]? taskList;
+    private string? text;
+
+    protected override async Task OnInitializedAsync()
+    {
+        taskList = await TaskClient.GetTasksAsync();
+    }
+
+    private async Task AddNewTask(){
+        if (string.IsNullOrWhiteSpace(text)) return;
+        try{
+            taskList = await TaskClient.PostTaskAsync(text);
+            text = string.Empty;
+        }catch(Exception e){
+            Console.WriteLine($"Error during add: {e.Message}");
+        }
+    }
+
+    private async Task DeleteTask(int id){
+
+        try{
+            taskList = await TaskClient.DeleteTaskAsync(id);
+        }catch(Exception e){
+            Console.WriteLine($"Error during remove of: {e.Message}");
+        }
+    }
+}

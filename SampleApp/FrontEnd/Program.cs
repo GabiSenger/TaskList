@@ -5,10 +5,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
-builder.Services.AddHttpClient<WeatherForecastClient>(c =>
+builder.Services.AddHttpClient<TaskItemClient>(c =>
 {
-    var url = builder.Configuration["WEATHER_URL"] 
-        ?? throw new InvalidOperationException("WEATHER_URL is not set");
+    var url = builder.Configuration["TASK_URL"] 
+        ?? throw new InvalidOperationException("TASK_URL is not set");
 
     c.BaseAddress = new(url);
 });

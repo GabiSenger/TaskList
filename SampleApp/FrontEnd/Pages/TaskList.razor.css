@@ -1,0 +1,42 @@
+.list-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;          
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.list-area p {
+    margin: 0;         
+    line-height: 1.2;  
+}
+
+.list-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    gap: 0.5rem;
+}
+
+.btn-delete {
+    background-color: tomato;
+    border-radius: 8px; 
+    border: none;          
+    box-shadow: none;    
+    padding: 0.25rem 0.5rem; 
+    cursor: pointer;
+    color:aliceblue;
+}
+
+.btn-add {
+    border-radius: 8px; 
+    border: none;          
+    box-shadow: none;    
+    padding: 0.25rem 0.5rem; 
+    cursor: pointer;
+    color:aliceblue;
+    background-color: darkolivegreen;
+
+}
